@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models.models import PublicGymnasium
+
+
+admin.site.register(PublicGymnasium)

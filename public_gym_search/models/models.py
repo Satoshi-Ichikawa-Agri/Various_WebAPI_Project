@@ -16,7 +16,7 @@ class PublicGymnasium(BaseMixin):
     id = models.CharField(default=create_primary_key(), primary_key=True, max_length=12) # 主キー
     facility_name = models.CharField(max_length=100, unique=True) # 施設名称
     prefecture = models.CharField(max_length=20) # 都道府県
-    Municipality = models.CharField(max_length=20) # 自治体(区市町村)
+    municipality = models.CharField(max_length=20) # 自治体(区市町村)
     address = models.CharField(max_length=255) # 所在地
     telephone = models.CharField(max_length=30) # 電話番号
     url = models.CharField(max_length=255) # HP-URL
@@ -24,6 +24,7 @@ class PublicGymnasium(BaseMixin):
     
     class Meta:
         db_table = 'public_gymnasium'
+        ordering = ['prefecture']
     
     def __str__(self):
         return self.facility_name
