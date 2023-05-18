@@ -4,6 +4,26 @@ from rest_framework.response import Response
 
 from public_gym_search.models.models import PublicGymnasium
 from public_gym_search.serializers.serializers import PublicGymnasiumSerializer
+from .web_scraping import WebScraping
+
+
+@api_view(['GET', 'POST'])
+def web_scraping_execute(request):
+    """ Go Scraping """
+    
+    if request.method == 'POST':
+        
+        web_scraping = WebScraping()
+        web_scraping.web_scraping()
+        
+        return Response({
+            'message': 'Response',
+            'data': request.data,
+            })
+    
+    return Response({
+        'message': 'Request',
+        })
 
 
 @api_view(['GET', 'POST'])
