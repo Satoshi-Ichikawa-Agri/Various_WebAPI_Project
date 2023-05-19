@@ -7,7 +7,7 @@ from datetime import date, datetime
 class Const(object):
     """ 定数とfunction """
     
-    GYM_SITE_URL = ''
+    GYM_SITE_URL = 'https://www.homemate-research-sports.com/'
     
     WORKSPACE_DIR = os.getcwd() # workspaceのdirectory_path
     
@@ -22,6 +22,8 @@ class Const(object):
         if value is None or value == 'None':
             return True
         if len(value) == 0:
+            return True
+        if value == '':
             return True
         
         return False

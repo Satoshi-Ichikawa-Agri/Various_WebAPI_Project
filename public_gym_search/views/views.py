@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
+from rest_framework import status
 from rest_framework.response import Response
 
 from public_gym_search.models.models import PublicGymnasium
-from public_gym_search.serializers.serializers import PublicGymnasiumSerializer
+from public_gym_search.serializers.serializers import (
+    PublicGymnasiumSearchSerializer,
+    PublicGymnasiumRegisterSerializer
+    )
 from .web_scraping import WebScraping
 
 
@@ -31,20 +35,47 @@ def public_gym_search(request):
     """ PublicGymnasium Response View """
     
     if request.method == 'POST':
+        try:
+            prefecture = request.data['prefecture']
+            municipality = request.data['municipality']
         
-        prefecture = request.data['prefecture']
-        municipality = request.data['municipality']
+            queryset = PublicGymnasium.objects.filter(
+                prefecture=prefecture,
+                municipality=municipality
+                )
+            serializer = PublicGymnasiumSearchSerializer(queryset, many=True)
         
-        queryset = PublicGymnasium.objects.filter(
-            prefecture=prefecture,
-            municipality=municipality
-            )
-        serializer = PublicGymnasiumSerializer(queryset, many=True)
+            return Response(serializer.data)
         
-        return Response(serializer.data)
-    
-    
+        except:
+            content = {'message': '都道府県もしくは区市町村で検索をしてください。'}
+            return Response(content, status=status.HTTP_400_BAD_REQUEST)
     
     return Response({
         'message': 'あなたの住んでいる場所の公営体育館を検索できます！',
+        })
+
+
+@api_view(['GET', 'POST'])
+def public_gym_register(request):
+    """ PublicGymnasium Register View """
+    
+    if request.method == 'POST':
+        try:
+            serializer = PublicGymnasiumRegisterSerializer(data=request.data)
+            
+            if serializer.is_valid():
+                serializer.save()
+        
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+    queryset = PublicGymnasium.objects.all()
+    serializer = PublicGymnasiumSearchSerializer(queryset, many=True)
+    
+    return Response({
+        'message': '新規公営体育館を登録します。',
+        'data': serializer.data,
         })
