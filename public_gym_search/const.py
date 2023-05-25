@@ -7,7 +7,7 @@ from datetime import date, datetime
 class Const(object):
     """ 定数とfunction """
     
-    GYM_SITE_URL = 'https://www.homemate-research-sports.com/'
+    GYM_SITE_URL = 'https://www.homemate-research-gym.com/list/'
     
     WORKSPACE_DIR = os.getcwd() # workspaceのdirectory_path
     

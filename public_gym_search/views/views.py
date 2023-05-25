@@ -9,16 +9,24 @@ from public_gym_search.serializers.serializers import (
     PublicGymnasiumRegisterSerializer
     )
 from .web_scraping import WebScraping
+from .data_cleansing import DataCleansing
 
 
 @api_view(['GET', 'POST'])
 def web_scraping_execute(request):
     """ Go Scraping """
-    
     if request.method == 'POST':
         
+        # スクレイピング
         web_scraping = WebScraping()
-        web_scraping.web_scraping()
+        gym_list = web_scraping.web_scraping()
+        
+        # データクレンジング
+        data_cleansing = DataCleansing(gym_list)
+        data_cleansing.data_cleansing_process()
+        
+        # DB登録
+        
         
         return Response({
             'message': 'Response',
@@ -33,7 +41,6 @@ def web_scraping_execute(request):
 @api_view(['GET', 'POST'])
 def public_gym_search(request):
     """ PublicGymnasium Response View """
-    
     if request.method == 'POST':
         try:
             prefecture = request.data['prefecture']
@@ -59,7 +66,6 @@ def public_gym_search(request):
 @api_view(['GET', 'POST'])
 def public_gym_register(request):
     """ PublicGymnasium Register View """
-    
     if request.method == 'POST':
         try:
             serializer = PublicGymnasiumRegisterSerializer(data=request.data)
