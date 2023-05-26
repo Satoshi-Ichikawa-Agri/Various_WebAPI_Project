@@ -161,6 +161,7 @@ cython_debug/
 
 
 # SATOSHI Original
-/config
 Dev_Note.txt
 public_gym_list.xlsx
+config/settings.py
+/input

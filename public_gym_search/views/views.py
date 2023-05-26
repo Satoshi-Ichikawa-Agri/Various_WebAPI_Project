@@ -25,8 +25,12 @@ def web_scraping_execute(request):
         data_cleansing = DataCleansing(gym_list)
         data_cleansing.data_cleansing_process()
         
-        # DB登録
+        # データクレンジングpart2
+        data_cleansing.data_cleansing_address()
         
+        # DB登録
+        data_cleansing.db_insert()
+        print('処理が完了しました。')
         
         return Response({
             'message': 'Response',
