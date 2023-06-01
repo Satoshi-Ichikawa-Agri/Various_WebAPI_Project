@@ -1,19 +1,17 @@
 """ 定数やfunctionの管理 """
 import os
 import time
-from datetime import date, datetime
 
 
 class Const(object):
     """ 定数とfunction """
-    
-    GYM_SITE_URL = 'https://www.homemate-research-gym.com/list/'
-    
-    WORKSPACE_DIR = os.getcwd() # workspaceのdirectory_path
-    
-    INT_UNSET = -1 # int型valueのunset
-    STRING_EMPTY = '' # str型valueのunset
 
+    GYM_SITE_URL = 'https://www.homemate-research-gym.com/list/'
+
+    WORKSPACE_DIR = os.getcwd()  # workspaceのdirectory_path
+
+    INT_UNSET = -1  # int型valueのunset
+    STRING_EMPTY = ''  # str型valueのunset
 
     @classmethod
     def is_null_or_empty(cls, value):
@@ -25,9 +23,8 @@ class Const(object):
             return True
         if value == '':
             return True
-        
-        return False
 
+        return False
 
     @classmethod
     def remove_value(cls, value, start, end):
@@ -39,9 +36,7 @@ class Const(object):
         """
         return value[:start] + value[end + 1:]
 
-
     @classmethod
     def time_keeper(cls, seconds: int):
         """ Time Keeper """
         time.sleep(seconds)
-
