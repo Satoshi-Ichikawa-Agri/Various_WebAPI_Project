@@ -22,8 +22,8 @@ class PublicGymnasium(BaseMixin):
     training_room_flag = models.BooleanField(blank=True, null=True)  # トレーニングルームの有無
 
     class Meta:
-        db_table = 'public_gymnasium'
-        ordering = ['prefecture']
+        db_table = "public_gymnasium"
+        ordering = ["prefecture"]
 
     def __str__(self):
         return self.facility_name

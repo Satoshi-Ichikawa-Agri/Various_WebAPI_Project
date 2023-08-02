@@ -12,16 +12,16 @@ class PublicGymnasiumSearchSerializer(serializers.ModelSerializer):
     class Meta:
         model = PublicGymnasium
         field = [
-            'id',
-            'facility_name',
-            'prefecture',
-            'municipality',
-            'address',
-            'telephone',
-            'url',
-            'training_room_flag',
+            "id",
+            "facility_name",
+            "prefecture",
+            "municipality",
+            "address",
+            "telephone",
+            "url",
+            "training_room_flag",
             ]
-        fields = '__all__'
+        fields = "__all__"
 
 
 class PublicGymnasiumRegisterSerializer(serializers.ModelSerializer):
@@ -38,13 +38,13 @@ class PublicGymnasiumRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = PublicGymnasium
         field = [
-            'id',
-            'facility_name',
-            'prefecture',
-            'municipality',
-            'address',
-            'telephone',
-            'url',
-            'training_room_flag',
+            "id",
+            "facility_name",
+            "prefecture",
+            "municipality",
+            "address",
+            "telephone",
+            "url",
+            "training_room_flag",
             ]
-        fields = '__all__'
+        fields = "__all__"

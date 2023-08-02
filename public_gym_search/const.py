@@ -6,22 +6,22 @@ import time
 class Const(object):
     """ 定数とfunction """
 
-    GYM_SITE_URL = 'https://www.homemate-research-gym.com/list/'
+    GYM_SITE_URL = "https://www.homemate-research-gym.com/list/"
 
     WORKSPACE_DIR = os.getcwd()  # workspaceのdirectory_path
 
     INT_UNSET = -1  # int型valueのunset
-    STRING_EMPTY = ''  # str型valueのunset
+    STRING_EMPTY = ""  # str型valueのunset
 
     @classmethod
     def is_null_or_empty(cls, value):
         """指定値がNoneもしくは空でないかをチェックする
         """
-        if value is None or value == 'None':
+        if value is None or value == "None":
             return True
         if len(value) == 0:
             return True
-        if value == '':
+        if value == "":
             return True
 
         return False

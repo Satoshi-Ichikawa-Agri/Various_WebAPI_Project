@@ -27,18 +27,18 @@ class DataCleansing(object):
 
     def __init__(self, data_list=None):
         self.data_list = data_list  # スクレイピング結果オブジェクト
-        self.wb = load_workbook('public_gym_list.xlsx')  # Excel Book
-        self.ws = self.wb['Sheet1']  # Excel Sheet
+        self.wb = load_workbook("public_gym_list.xlsx")  # Excel Book
+        self.ws = self.wb["Sheet1"]  # Excel Sheet
 
     def get_value(self, row, column):
         """ 対象セルの値を取得する """
         if column < 0 or row < 0:
-            return ''
+            return ""
 
         value = str(self.ws.cell(row=row, column=column).value)
 
         if Const.is_null_or_empty(value):
-            return ''
+            return ""
 
         return value
 
@@ -52,8 +52,8 @@ class DataCleansing(object):
         変更後：「東京都千代田区北の丸公園２－３」
         ※本処理は完璧でない。ファイルを確認し、修正されていないデータを手動で修正する
         """
-        pattern = r'所在地： 〒\d{3}-\d{4}\s'
-        result = re.sub(pattern, '', value)
+        pattern = r"所在地： 〒\d{3}-\d{4}\s"
+        result = re.sub(pattern, "", value)
 
         return result
 
@@ -62,9 +62,9 @@ class DataCleansing(object):
         所在地から都道府県と市区町村を抽出する
         ※本処理は完璧でない。ファイルを確認し、修正されていないデータを手動で修正する
         """
-        pattern = '''(...??[都道府県])((?:旭川|伊達|石狩|盛岡|奥州|田村|南相馬|那須塩原|東村山|武蔵村山|羽村|十日町|上越|
+        pattern = """(...??[都道府県])((?:旭川|伊達|石狩|盛岡|奥州|田村|南相馬|那須塩原|東村山|武蔵村山|羽村|十日町|上越|
         富山|野々市|大町|蒲郡|四日市|姫路|大和郡山|廿日市|下松|岩国|田川|大村|宮古|富良野|別府|佐伯|黒部|小諸|塩尻|玉野|
-        周南)市|(?:余市|高市|[^市]{2,3}?)郡(?:玉村|大町|.{1,5}?)[町村]|(?:.{1,4}市)?[^町]{1,4}?区|.{1,7}?[市町村])(.+)'''
+        周南)市|(?:余市|高市|[^市]{2,3}?)郡(?:玉村|大町|.{1,5}?)[町村]|(?:.{1,4}市)?[^町]{1,4}?区|.{1,7}?[市町村])(.+)"""
 
         result = re.match(pattern, value)
 
@@ -72,8 +72,8 @@ class DataCleansing(object):
 
     def db_insert(self):
         """ Excel to DB """
-        self.wb = load_workbook('public_gym_list.xlsx')
-        self.ws = self.wb['Sheet1']
+        self.wb = load_workbook("public_gym_list.xlsx")
+        self.ws = self.wb["Sheet1"]
 
         # Excel-Dataを取得し、Modelリストを作成する
         model_list = []
@@ -87,7 +87,7 @@ class DataCleansing(object):
         print(model_list)
         print(len(model_list))
 
-        print('モデルリストの作成が終了した。')
+        print("モデルリストの作成が終了した。")
 
         # Model → DB INSERT
         count = 0
@@ -116,7 +116,7 @@ class DataCleansing(object):
         finally:
             self.wb.close()
 
-        print(f'{ count }件のデータをINSERTしました。')
+        print(f"{ count }件のデータをINSERTしました。")
 
     def data_cleansing_process(self):
         """ データクレンジング処理 """
@@ -141,14 +141,14 @@ class DataCleansing(object):
             self.set_value(i, 1, model.facility_name)
             self.set_value(i, 4, model.address)
 
-        print('処理が完了しました')
-        self.wb.save('public_gym_list.xlsx')
+        print("処理が完了しました")
+        self.wb.save("public_gym_list.xlsx")
         self.wb.close()
 
     def data_cleansing_address(self):
         # ここからはExcelファイルを再開封し直接編集する
-        self.wb = load_workbook('public_gym_list.xlsx')
-        self.ws = self.wb['Sheet1']
+        self.wb = load_workbook("public_gym_list.xlsx")
+        self.ws = self.wb["Sheet1"]
 
         model_list = []
         for row in range(2, self.ws.max_row + 1):
@@ -156,7 +156,7 @@ class DataCleansing(object):
             model.facility_name = self.get_value(row, 1)
             model_list.append(model)
 
-        print('箱完成')
+        print("箱完成")
 
         failure_list = []
         for i, model in enumerate(model_list):
@@ -174,7 +174,7 @@ class DataCleansing(object):
 
         print(len(failure_list))
 
-        print('Excelから値を取得し、モデルに格納した。')
+        print("Excelから値を取得し、モデルに格納した。")
 
         for model in model_list:
             if model.index == -1:
@@ -183,6 +183,6 @@ class DataCleansing(object):
             self.set_value(row, 2, model.prefecture)
             self.set_value(row, 3, model.municipality)
 
-        self.wb.save('public_gym_list.xlsx')
+        self.wb.save("public_gym_list.xlsx")
         self.wb.close()
-        print('処理が終了しました。')
+        print("処理が終了しました。")
