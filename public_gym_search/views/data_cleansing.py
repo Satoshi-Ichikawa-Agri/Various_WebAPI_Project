@@ -3,7 +3,7 @@ import re
 from django.db import transaction
 from openpyxl import load_workbook
 
-from public_gym_search.const import Const
+from const import Const
 from public_gym_search.models.models import PublicGymnasium, create_primary_key
 
 
