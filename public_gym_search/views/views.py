@@ -1,3 +1,4 @@
+"""controller"""
 from django.db.models import Q
 from rest_framework.decorators import api_view
 from rest_framework import status
@@ -8,8 +9,8 @@ from public_gym_search.serializers.serializers import (
     PublicGymnasiumSearchSerializer,
     PublicGymnasiumRegisterSerializer
     )
-from .web_scraping import WebScraping
-from .data_cleansing import DataCleansing
+from .web_scraping_pgs import WebScraping
+from .data_cleansing import DataCleansing, DataInsert
 
 
 @api_view(["GET", "POST"])
@@ -27,8 +28,24 @@ def web_scraping_execute(request):
 
         # データクレンジングpart2
         data_cleansing.data_cleansing_address()
+        print("処理が完了しました。")
 
+        return Response({
+            "message": "Response",
+            "data": request.data,
+            })
+
+    return Response({
+        "message": "Request",
+        })
+
+
+@api_view(["GET", "POST"])
+def data_insert_execute(request):
+    """data insert"""
+    if request.method == "POST":
         # DB登録
+        data_cleansing = DataInsert()
         data_cleansing.db_insert()
         print("処理が完了しました。")
 
