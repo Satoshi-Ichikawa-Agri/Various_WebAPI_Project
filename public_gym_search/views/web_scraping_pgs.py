@@ -1,5 +1,5 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
+from api_common.web_scraping import WebScrapingCommon
+from const import Const
 
 
 class WebScraping(object):
@@ -10,23 +10,24 @@ class WebScraping(object):
 
     def web_scraping(self):
         """"""
-        driver = webdriver.Chrome()
+        wsc = WebScrapingCommon()
+        driver = wsc.get_web_driver()
 
         global_list = []
         for page in range(1, 59):
             # 1~58p全てでスクレイピングする
-            url = f"https://www.homemate-research-gym.com/list/{ page }"
+            url = f"{Const.SPOLAND_URL}{ page }"
             driver.get(url)
 
             # 施設名称取得
             elem_target_titles = []
-            elems_title = driver.find_elements(By.CLASS_NAME, "fa_name")
+            elems_title = wsc.get_elements_by_classes(driver, "fa_name")
             for elem_title in elems_title:
                 elem_target_titles.append(elem_title.text)
 
             # 住所取得
             elem_target_addresses = []
-            elems_address = driver.find_elements(By.CLASS_NAME, "fa_address")
+            elems_address = wsc.get_elements_by_classes(driver, "fa_address")
             for index, elem_address in enumerate(elems_address):
                 elem_target_addresses.append(elem_address.text)
 
@@ -39,6 +40,7 @@ class WebScraping(object):
 
             global_list.append(target_list)
 
-        driver.close()
+        wsc.disconnect(driver)
+        del wsc  # デストラクタの起動
 
         return global_list
