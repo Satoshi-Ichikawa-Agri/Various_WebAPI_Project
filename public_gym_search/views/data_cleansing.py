@@ -134,7 +134,7 @@ class DataCleansing(object):
 
 
 class DataInsert(object):
-    """ Data Cleansing """
+    """ Data Insert """
 
     def __init__(self):
         """コンストラクタ"""

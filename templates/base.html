@@ -29,13 +29,21 @@
                         <li>
                             <a href="{% url 'public_gymnasium_register' %}">公営体育館-登録API</a>
                         </li>
+                        <li>
+                            <a href="{% url 'snd_broadcast_search' %}">SND放送回-検索API</a>
+                        </li>
                         <br>
+                        <hr>
                         <li>
                             <a href="{% url 'public_gymnasium_scraping' %}">公営体育館-スクレイピングAPI</a>
                             <p>※管理者用</p>
                         </li>
                         <li>
                             <a href="{% url 'public_gymnasium_insert' %}">公営体育館-データ投入API</a>
+                            <p>※管理者用</p>
+                        </li>
+                        <li>
+                            <a href="{% url 'snd_data_insert_execute' %}">SND放送回-データ投入API</a>
                             <p>※管理者用</p>
                         </li>
                     </ul>

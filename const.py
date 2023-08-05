@@ -13,6 +13,9 @@ class Const(object):
     PUBLIC_GYM_LIST_FILE = "public_gym_list.xlsx"
     PUBLIC_GYM_LIST_SHEET_NAME = "Sheet1"
 
+    SND_LIST_FILE = "snd_bt_list.xlsx"
+    SND_LIST_SHEET_NAME = "Sheet1"
+
     SPOLAND_URL = "https://www.homemate-research-gym.com/list/"
 
     WINDOWS_DOWNLOAS_DIR = "C:\\Users\\daiko\\Downloads"
