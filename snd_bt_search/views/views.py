@@ -42,24 +42,26 @@ def snd_broadcast_search(request):
             guests = request.data.get("guests")
             remarks = request.data.get("remarks")
 
-            # OR条件での検索を行う
+            # AND条件での部分一致検索を行う
             queryset = SndBroadcast.objects.filter(
-                Q(broadcast_year=broadcast_year)
-                | Q(broadcast_month=broadcast_month)
-                | Q(broadcast_date=broadcast_date)
-                | Q(broadcast_content=broadcast_content)
-                | Q(assistant_1=assistant_1)
-                | Q(assistant_2=assistant_2)
-                | Q(guests=guests)
-                | Q(remarks=remarks)
+                Q(broadcast_year__icontains=broadcast_year) &
+                Q(broadcast_month__icontains=broadcast_month) &
+                Q(broadcast_date__icontains=broadcast_date) &
+                Q(broadcast_content__icontains=broadcast_content) &
+                Q(assistant_1__icontains=assistant_1) &
+                Q(assistant_2__icontains=assistant_2) &
+                Q(guests__icontains=guests) &
+                Q(remarks__icontains=remarks)
             )
-            serializer = SndBroadcastSearchSerializer(queryset, many=True)
 
+            if not queryset.exists():
+                return Response({"message": "該当する放送が見つかりませんでした。"}, status=status.HTTP_404_NOT_FOUND)
+
+            serializer = SndBroadcastSearchSerializer(queryset, many=True)
             return Response(serializer.data)
 
         except Exception:
-            content = {"message": "放送年、放送月、放送日、アシスタント、ゲスト、備考で検索をしてください。"}
-            return Response(content, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message": "検索条件を適切に指定してください。"}, status=status.HTTP_400_BAD_REQUEST)
 
     return Response({
         "message": "有吉弘行のSUNDAYNIGHTDREAMRの放送回を検索できます!",
