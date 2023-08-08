@@ -1,5 +1,6 @@
 """controller"""
 from django.db.models import Q
+from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
@@ -7,6 +8,18 @@ from rest_framework.response import Response
 from snd_bt_search.models.models import SndBroadcast
 from snd_bt_search.serializers.serializers import SndBroadcastSearchSerializer
 from .data_insert import DataInsert
+from snd_bt_search.forms import SndBroadcastSearchForm
+
+
+def snd_search(request):
+    """"""
+    template_name = "snd/snd_search.html"
+    search_form = SndBroadcastSearchForm()
+
+    return render(
+        request, template_name,
+        context={"search_form": search_form}
+        )
 
 
 @api_view(["GET", "POST"])

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>API 一覧</h2>
+<br>
+<h3>公営体育館API</h3>
+<ul>
+    <li>
+        <a href="{% url 'public_gymnasium_search' %}">公営体育館-検索API</a>
+    </li>
+    <li>
+        <a href="{% url 'public_gymnasium_register' %}">公営体育館-登録API</a>
+    </li>
+    <li>
+        <a href="{% url 'snd_broadcast_search' %}">SND放送回-検索API</a>
+    </li>
+    <hr>
+    <li>
+        <a href="{% url 'public_gymnasium_scraping' %}">公営体育館-スクレイピングAPI</a> ※管理者用
+    </li>
+    <li>
+        <a href="{% url 'public_gymnasium_insert' %}">公営体育館-データ投入API</a> ※管理者用
+    </li>
+    <li>
+        <a href="{% url 'snd_data_insert_execute' %}">SND放送回-データ投入API</a> ※管理者用
+    </li>
+</ul>
+<br>
+
+<h3>検索</h3>
+<ul>
+    <li>
+        <a href="{% url 'snd_search' %}">SND放送回-検索</a>
+    </li>
+</ul>
+
+<style>
+    h2 {
+        padding: 0.5em;
+        margin-bottom: 1em;
+        color: black;
+        background: #bdecbc;
+        border-top: solid 3px #31b955;
+        border-bottom: solid 3px #31b955;
+    }
+</style>
+{% endblock %}
