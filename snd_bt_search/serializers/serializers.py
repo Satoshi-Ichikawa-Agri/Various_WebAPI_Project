@@ -26,5 +26,5 @@ class SndBroadcastSearchSerializer(serializers.ModelSerializer):
             "assistant_2",
             "guests",
             "remarks",
-            ]
+        ]
         fields = "__all__"

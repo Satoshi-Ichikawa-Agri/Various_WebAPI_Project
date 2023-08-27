@@ -5,7 +5,7 @@ import time
 
 
 class Const(object):
-    """ 定数とfunction """
+    """定数とfunction"""
 
     INT_UNSET = -1  # int型valueのunset
     STRING_EMPTY = ""  # str型valueのunset
@@ -40,7 +40,7 @@ class Const(object):
         """File Copy"""
         shutil.copy2(original_file, copy_to)
 
-# ====== Utility ============ #
+    # ====== Utility ============ #
     @classmethod
     def is_null_or_empty(cls, value):
         """指定値がNoneもしくは空でないかをチェック"""
@@ -55,16 +55,16 @@ class Const(object):
 
     @classmethod
     def remove_value(cls, value, start, end):
-        """ 指定した範囲の文字列を削除する
+        """指定した範囲の文字列を削除する
 
         Parameters:
             value: 対象の値
             start: 開始位置
             end: 終了位置
         """
-        return value[:start] + value[end + 1:]
+        return value[:start] + value[end + 1 :]
 
     @classmethod
     def time_keeper(cls, seconds: int):
-        """ Time Keeper """
+        """Time Keeper"""
         time.sleep(seconds)

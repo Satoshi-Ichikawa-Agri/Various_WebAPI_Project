@@ -7,7 +7,7 @@ from snd_bt_search.models.models import SndBroadcast
 
 
 class DataInsert(object):
-    """ Data Insert """
+    """Data Insert"""
 
     def __init__(self):
         """コンストラクタ"""
@@ -20,8 +20,7 @@ class DataInsert(object):
     def db_insert(self):
         """Excel to DB"""
         excel_operation = ExcelOperation()
-        wb, ws = excel_operation.read_excel(
-            Const.SND_LIST_FILE, Const.SND_LIST_SHEET_NAME)
+        wb, ws = excel_operation.read_excel(Const.SND_LIST_FILE, Const.SND_LIST_SHEET_NAME)
 
         try:
             # ExcelDataを取得し、Modelリストを作成する
@@ -56,8 +55,8 @@ class DataInsert(object):
                         assistant_1=model.assistant_1,
                         assistant_2=model.assistant_2,
                         guests=model.guests,
-                        remarks=model.remarks
-                        )
+                        remarks=model.remarks,
+                    )
                     models.append(snd_broadcast)
                     count += 1
 
