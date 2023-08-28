@@ -8,7 +8,7 @@ from public_gym_search.views.views import (
     data_insert_execute,
 )
 from public_gym_search.views.home_url_views import top
-from snd_bt_search.views.views import snd_broadcast_search, snd_data_insert_execute, snd_search
+from snd_bt_search.views.views import snd_broadcast_search, snd_data_insert_execute
 
 
 urlpatterns = [
