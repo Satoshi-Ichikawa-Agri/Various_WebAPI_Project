@@ -67,3 +67,15 @@ class WebScrapingCommon(object):
         サンプル:<input type="button" value="Excel" onclick="javascript:excelout()">
         """
         driver.execute_script("arguments[0].click();", link_elem)
+
+
+class WebInfoParse(object):
+    """WebScraping_Common_Parse"""
+
+    def __init__(self):
+        """コンストラクタ"""
+        pass
+
+    def __del__(self):
+        """デストラクタ"""
+        print("WebInfoParseオブジェクトを破棄します。")

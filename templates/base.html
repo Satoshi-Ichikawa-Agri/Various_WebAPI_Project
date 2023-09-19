@@ -19,26 +19,7 @@
         <div class="container-sm">
             <div class="row">
                 <div class="col-12">
-                    <h1>API 一覧</h1>
-                    <br>
-                    <h3>公営体育館API</h3>
-                    <ul>
-                        <li>
-                            <a href="{% url 'public_gymnasium_search' %}">公営体育館-検索API</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'public_gymnasium_register' %}">公営体育館-登録API</a>
-                        </li>
-                        <br>
-                        <li>
-                            <a href="{% url 'public_gymnasium_scraping' %}">公営体育館-スクレイピングAPI</a>
-                            <p>※管理者用</p>
-                        </li>
-                        <li>
-                            <a href="{% url 'public_gymnasium_insert' %}">公営体育館-データ投入API</a>
-                            <p>※管理者用</p>
-                        </li>
-                    </ul>
+                    {% block content %}{% endblock %}
                 </div>
             </div>
         </div>
